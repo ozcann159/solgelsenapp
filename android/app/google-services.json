@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "812156076823",
+    "project_id": "solgensenapp",
+    "storage_bucket": "solgensenapp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:812156076823:android:6e9bc4f3bd84c873146d52",
+        "android_client_info": {
+          "package_name": "com.develif.app.solgensenapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCTlSxCovTkB9Xp3knR8OkT39dsck0dtw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
