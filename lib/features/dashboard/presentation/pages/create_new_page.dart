@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:solgensenapp/features/dashboard/presentation/pages/account_list_page.dart';
 import 'package:solgensenapp/features/dashboard/presentation/widgets/appbar/create_appbar.dart';
 
 class CreateNewPage extends StatefulWidget {
@@ -11,6 +13,8 @@ class CreateNewPage extends StatefulWidget {
 
 class _CreateNewPageState extends State<CreateNewPage> {
   String? selectedAccountType;
+  TextEditingController nameController = TextEditingController();
+  TextEditingController balanceController = TextEditingController();
 
   final List<String> accountsType = [
     "Assets",
@@ -47,11 +51,12 @@ class _CreateNewPageState extends State<CreateNewPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextFormField(
+                controller: nameController,
                 decoration: InputDecoration(
                   labelText: 'Account Name',
                   contentPadding: EdgeInsets.symmetric(
                       vertical: 8,
-                      horizontal: 12), // İçerik boşluğunu incelttik
+                      horizontal: 12), 
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
@@ -64,7 +69,7 @@ class _CreateNewPageState extends State<CreateNewPage> {
                   labelText: "Account Type",
                   contentPadding: EdgeInsets.symmetric(
                       vertical: 8,
-                      horizontal: 12), // İçerik boşluğunu incelttik
+                      horizontal: 12), 
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
@@ -82,7 +87,8 @@ class _CreateNewPageState extends State<CreateNewPage> {
                 },
               ),
               SizedBox(height: 40),
-              TextField(
+              TextFormField(
+                controller: balanceController,
                 decoration: InputDecoration(
                   labelText: 'Balance',
                   contentPadding:
@@ -91,6 +97,7 @@ class _CreateNewPageState extends State<CreateNewPage> {
                     borderRadius: BorderRadius.circular(30),
                   ),
                 ),
+                keyboardType: TextInputType.number,
               ),
               SizedBox(height: 50),
               ElevatedButton(
@@ -105,7 +112,20 @@ class _CreateNewPageState extends State<CreateNewPage> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () async {
+                  FirebaseFirestore firestore = FirebaseFirestore.instance;
+                  await firestore.collection('accounts').add({
+                    'name': nameController.text,
+                    'type': selectedAccountType,
+                    'balance': double.parse(balanceController.text),
+                  });
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AccountListPage(),
+                    ),
+                  );
+                },
                 child: Text('Create Account'),
               ),
             ],
