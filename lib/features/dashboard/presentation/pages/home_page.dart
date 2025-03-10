@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage> {
                   const SizedBox(height: 24),
 
                   // Monthly Payment Overview
-                  _buildMonthlyPaymentChart(),
+                  //_buildMonthlyPaymentChart(),
                   const SizedBox(height: 24),
 
                   // Bottom Row

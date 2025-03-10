@@ -1,6 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:solgensenapp/core/constants/app_colors.dart';
+import 'package:solgensenapp/core/utils/responsive_layout.dart';
 import 'package:solgensenapp/features/dashboard/presentation/widgets/appbar/plus_appbar.dart';
+import 'package:solgensenapp/features/dashboard/presentation/widgets/bottom/bottom_navigation_bar.dart';
 import 'package:solgensenapp/features/dashboard/presentation/widgets/card/account_list_card.dart';
 
 class AccountListPage extends StatefulWidget {
@@ -21,7 +24,8 @@ class _AccountListPageState extends State<AccountListPage> {
 
   Future<void> fetchAccounts() async {
     try {
-      var snapshot = await FirebaseFirestore.instance.collection('accounts').get();
+      var snapshot =
+          await FirebaseFirestore.instance.collection('accounts').get();
       setState(() {
         accounts = snapshot.docs.map((doc) {
           var data = doc.data() as Map<String, dynamic>;
@@ -36,7 +40,10 @@ class _AccountListPageState extends State<AccountListPage> {
 
   void _deleteAccount(String docId, int index) async {
     try {
-      await FirebaseFirestore.instance.collection('accounts').doc(docId).delete();
+      await FirebaseFirestore.instance
+          .collection('accounts')
+          .doc(docId)
+          .delete();
       setState(() {
         accounts.removeAt(index);
       });
@@ -47,6 +54,7 @@ class _AccountListPageState extends State<AccountListPage> {
 
   @override
   Widget build(BuildContext context) {
+    final isSmallScreen = ResponsiveLayout.isMobile(context);
     return Scaffold(
       backgroundColor: Color(0xFFF5F5F5),
       appBar: PlusAppBar(),
@@ -66,11 +74,13 @@ class _AccountListPageState extends State<AccountListPage> {
                         bool confirm = await showDialog(
                           context: context,
                           builder: (context) => AlertDialog(
-                            title: Text("Silme Onayı"),
-                            content: Text("Bu öğeyi silmek istediğinize emin misiniz?"),
+                            title: Text("Delete Confirmation"),
+                            content: Text(
+                                "Are you sure you want to delete this item?"),
                             actions: [
                               TextButton(
-                                onPressed: () => Navigator.of(context).pop(false),
+                                onPressed: () =>
+                                    Navigator.of(context).pop(false),
                                 child: Text("İptal"),
                               ),
                               TextButton(
@@ -78,7 +88,8 @@ class _AccountListPageState extends State<AccountListPage> {
                                   Navigator.of(context).pop(true);
                                   _deleteAccount(asset["id"], index);
                                 },
-                                child: Text("Evet", style: TextStyle(color: Colors.red)),
+                                child: Text("Evet",
+                                    style: TextStyle(color: Colors.red)),
                               ),
                             ],
                           ),
@@ -92,14 +103,17 @@ class _AccountListPageState extends State<AccountListPage> {
                           color: Colors.red.withOpacity(0.7),
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: Icon(Icons.delete, color: Colors.white, size: 30),
+                        child:
+                            Icon(Icons.delete, color: Colors.white, size: 30),
                       ),
                       child: AccountListCard(
                         title: asset["name"] ?? "Default Name",
                         subtitle: asset["type"] ?? "No Genre Information",
-                        balance: (asset["balance"] != null && asset["balance"] is String)
-                ? double.tryParse(asset["balance"]) ?? 0.0  // String'i double'a çevirme
-                : asset["balance"] ?? 0.0, 
+                        balance: (asset["balance"] != null &&
+                                asset["balance"] is String)
+                            ? double.tryParse(asset["balance"]) ??
+                                0.0 // String'i double'a çevirme
+                            : asset["balance"] ?? 0.0,
                         onPressed: () {
                           print('Clicked');
                         },
@@ -110,6 +124,28 @@ class _AccountListPageState extends State<AccountListPage> {
                 );
               },
             ),
+            bottomNavigationBar: isSmallScreen
+          ? Container(
+              decoration: BoxDecoration(
+                color: AppColors.primary,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey
+                      ..withValues(
+                        alpha: (0.5 * 255),
+                        //blurRadius: 10,
+                      ),
+                  ),
+                ],
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(20),
+                ),
+                child: custom_navigation_bar(),
+              ),
+            )
+          : null,
     );
   }
 }

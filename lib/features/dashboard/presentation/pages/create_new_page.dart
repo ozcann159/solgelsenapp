@@ -1,8 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:solgensenapp/core/constants/app_colors.dart';
+import 'package:solgensenapp/core/utils/responsive_layout.dart';
 import 'package:solgensenapp/features/dashboard/presentation/pages/account_list_page.dart';
 import 'package:solgensenapp/features/dashboard/presentation/widgets/appbar/create_appbar.dart';
+import 'package:solgensenapp/features/dashboard/presentation/widgets/bottom/bottom_navigation_bar.dart';
 
 class CreateNewPage extends StatefulWidget {
   const CreateNewPage({super.key});
@@ -27,6 +30,7 @@ class _CreateNewPageState extends State<CreateNewPage> {
 
   @override
   Widget build(BuildContext context) {
+    final isSmallScreen = ResponsiveLayout.isMobile(context);
     return Scaffold(
       backgroundColor: Color(0xFFF5F5F5),
       appBar: CreateAppBar(),
@@ -132,6 +136,28 @@ class _CreateNewPageState extends State<CreateNewPage> {
           ),
         ),
       ),
+      bottomNavigationBar: isSmallScreen
+          ? Container(
+              decoration: BoxDecoration(
+                color: AppColors.primary,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey
+                      ..withValues(
+                        alpha: (0.5 * 255),
+                        //blurRadius: 10,
+                      ),
+                  ),
+                ],
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(20),
+                ),
+                child: custom_navigation_bar(),
+              ),
+            )
+          : null,
     );
   }
 }
