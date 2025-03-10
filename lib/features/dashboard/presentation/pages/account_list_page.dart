@@ -31,14 +31,14 @@ class _AccountListPageState extends State<AccountListPage> {
           actions: [
             TextButton(
               onPressed: () {
-                Navigator.of(context).pop(); // Diyaloğu kapat
+                Navigator.of(context).pop();
               },
               child: Text("İptal"),
             ),
             TextButton(
               onPressed: () {
                 setState(() {
-                  assetsList.removeAt(index); // Silme işlemi
+                  assetsList.removeAt(index);
                 });
                 Navigator.of(context).pop();
               },
@@ -61,48 +61,54 @@ class _AccountListPageState extends State<AccountListPage> {
         itemBuilder: (context, index) {
           final asset = assetsList[index];
 
-          return Dismissible(
-            key: Key(asset["title"]), // Benzersiz anahtar
-            direction: DismissDirection.endToStart, // Sadece sola kaydırma
-            confirmDismiss: (direction) async {
-              // Kullanıcıdan onay iste
-              bool confirm = await showDialog(
-                context: context,
-                builder: (context) => AlertDialog(
-                  title: Text("Silme Onayı"),
-                  content: Text("Bu öğeyi silmek istediğinize emin misiniz?"),
-                  actions: [
-                    TextButton(
-                      onPressed: () => Navigator.of(context).pop(false),
-                      child: Text("İptal"),
+          return Column(
+            children: [
+              Dismissible(
+                key: Key(asset["title"]),
+                direction: DismissDirection.endToStart,
+                confirmDismiss: (direction) async {
+                  // Kullanıcıdan onay iste
+                  bool confirm = await showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: Text("Silme Onayı"),
+                      content:
+                          Text("Bu öğeyi silmek istediğinize emin misiniz?"),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.of(context).pop(false),
+                          child: Text("İptal"),
+                        ),
+                        TextButton(
+                          onPressed: () => Navigator.of(context).pop(true),
+                          child:
+                              Text("Evet", style: TextStyle(color: Colors.red)),
+                        ),
+                      ],
                     ),
-                    TextButton(
-                      onPressed: () => Navigator.of(context).pop(true),
-                      child: Text("Evet", style: TextStyle(color: Colors.red)),
-                    ),
-                  ],
+                  );
+                  return confirm;
+                },
+                background: Container(
+                  alignment: Alignment.centerRight,
+                  padding: EdgeInsets.only(right: 20),
+                  decoration: BoxDecoration(
+                    color: Colors.red.withOpacity(0.7),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Icon(Icons.delete, color: Colors.white, size: 30),
                 ),
-              );
-              return confirm; // True ise sil, değilse geri al
-            },
-            background: Container(
-              alignment: Alignment.centerRight,
-              padding: EdgeInsets.only(right: 20),
-              decoration: BoxDecoration(
-                color: Colors.red.withOpacity(0.7), // Arka plan rengi
-                borderRadius: BorderRadius.circular(10),
+                child: AccountListCard(
+                  title: asset["title"],
+                  subtitle: asset["subtitle"],
+                  balance: asset["balance"],
+                  onPressed: () {
+                    print('Clicked');
+                  },
+                ),
               ),
-              child: Icon(Icons.delete,
-                  color: Colors.white, size: 30), // Silme ikonu
-            ),
-            child: AccountListCard(
-              title: asset["title"],
-              subtitle: asset["subtitle"],
-              balance: asset["balance"],
-              onPressed: () {
-                print('Clicked');
-              },
-            ),
+              SizedBox(height: 20),
+            ],
           );
         },
       ),

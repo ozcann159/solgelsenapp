@@ -10,6 +10,17 @@ class CreateNewPage extends StatefulWidget {
 }
 
 class _CreateNewPageState extends State<CreateNewPage> {
+  String? selectedAccountType;
+
+  final List<String> accountsType = [
+    "Assets",
+    "Debt",
+    "Income",
+    "Expense",
+    "Bank",
+    "Cash"
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,25 +46,67 @@ class _CreateNewPageState extends State<CreateNewPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TextField(
+              TextFormField(
                 decoration: InputDecoration(
-                  labelText: 'First Name',
-                  border: OutlineInputBorder(),
+                  labelText: 'Account Name',
+                  contentPadding: EdgeInsets.symmetric(
+                      vertical: 8,
+                      horizontal: 12), // İçerik boşluğunu incelttik
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
                 ),
               ),
-              SizedBox(height: 16),
+              SizedBox(height: 40),
+              DropdownButtonFormField<String>(
+                value: selectedAccountType,
+                decoration: InputDecoration(
+                  labelText: "Account Type",
+                  contentPadding: EdgeInsets.symmetric(
+                      vertical: 8,
+                      horizontal: 12), // İçerik boşluğunu incelttik
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                ),
+                items: accountsType.map((String type) {
+                  return DropdownMenuItem<String>(
+                    value: type,
+                    child: Text(type),
+                  );
+                }).toList(),
+                onChanged: (String? newValue) {
+                  setState(() {
+                    selectedAccountType = newValue;
+                  });
+                },
+              ),
+              SizedBox(height: 40),
               TextField(
                 decoration: InputDecoration(
-                  labelText: 'Last Name',
-                  border: OutlineInputBorder(),
+                  labelText: 'Balance',
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
                 ),
               ),
-              SizedBox(height: 16),
-              TextField(
-                decoration: InputDecoration(
-                  labelText: 'Email',
-                  border: OutlineInputBorder(),
+              SizedBox(height: 50),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xFF39EB8F),
+                  foregroundColor: Colors.white,
+                  minimumSize: Size(30, 40),
+                  textStyle: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'Montserrat',
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
+                onPressed: () {},
+                child: Text('Create Account'),
               ),
             ],
           ),
