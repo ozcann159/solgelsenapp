@@ -58,9 +58,8 @@ class _CreateNewPageState extends State<CreateNewPage> {
                 controller: nameController,
                 decoration: InputDecoration(
                   labelText: 'Account Name',
-                  contentPadding: EdgeInsets.symmetric(
-                      vertical: 8,
-                      horizontal: 12), 
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 8, horizontal: 12),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
@@ -71,9 +70,8 @@ class _CreateNewPageState extends State<CreateNewPage> {
                 value: selectedAccountType,
                 decoration: InputDecoration(
                   labelText: "Account Type",
-                  contentPadding: EdgeInsets.symmetric(
-                      vertical: 8,
-                      horizontal: 12), 
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 8, horizontal: 12),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
@@ -117,12 +115,38 @@ class _CreateNewPageState extends State<CreateNewPage> {
                   ),
                 ),
                 onPressed: () async {
+                  if (nameController.text.isEmpty ||
+                      selectedAccountType == null ||
+                      balanceController.text.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text("Please fill in all fields")),
+                    );
+                    return;
+                  }
+
+                  double? balance = double.tryParse(balanceController.text);
+                  if (balance == null) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                          content:
+                              Text("Please enter a valid number for balance")),
+                    );
+                    return;
+                  }
+
                   FirebaseFirestore firestore = FirebaseFirestore.instance;
-                  await firestore.collection('accounts').add({
+                  var newAccountRef = firestore
+                      .collection('accounts')
+                      .doc(); // Id
+
+                  await newAccountRef.set({
+                    'id': newAccountRef.id, 
                     'name': nameController.text,
                     'type': selectedAccountType,
-                    'balance': double.parse(balanceController.text),
+                    'balance': balance,
+                    'createdAt': FieldValue.serverTimestamp(),
                   });
+
                   Navigator.push(
                     context,
                     MaterialPageRoute(

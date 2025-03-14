@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:solgensenapp/core/constants/app_colors.dart';
 import 'package:solgensenapp/core/utils/responsive_layout.dart';
+import 'package:solgensenapp/features/dashboard/presentation/pages/view_details_page.dart';
 import 'package:solgensenapp/features/dashboard/presentation/widgets/appbar/plus_appbar.dart';
 import 'package:solgensenapp/features/dashboard/presentation/widgets/bottom/bottom_navigation_bar.dart';
 import 'package:solgensenapp/features/dashboard/presentation/widgets/card/account_list_card.dart';
@@ -75,12 +76,10 @@ class _AccountListPageState extends State<AccountListPage> {
                           context: context,
                           builder: (context) => AlertDialog(
                             title: Text("Delete Confirmation"),
-                            content: Text(
-                                "Are you sure you want to delete this item?"),
+                            content: Text("Are you sure you want to delete this item?"),
                             actions: [
                               TextButton(
-                                onPressed: () =>
-                                    Navigator.of(context).pop(false),
+                                onPressed: () => Navigator.of(context).pop(false),
                                 child: Text("İptal"),
                               ),
                               TextButton(
@@ -88,8 +87,7 @@ class _AccountListPageState extends State<AccountListPage> {
                                   Navigator.of(context).pop(true);
                                   _deleteAccount(asset["id"], index);
                                 },
-                                child: Text("Evet",
-                                    style: TextStyle(color: Colors.red)),
+                                child: Text("Evet", style: TextStyle(color: Colors.red)),
                               ),
                             ],
                           ),
@@ -103,19 +101,27 @@ class _AccountListPageState extends State<AccountListPage> {
                           color: Colors.red.withOpacity(0.7),
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child:
-                            Icon(Icons.delete, color: Colors.white, size: 30),
+                        child: Icon(Icons.delete, color: Colors.white, size: 30),
                       ),
                       child: AccountListCard(
                         title: asset["name"] ?? "Default Name",
                         subtitle: asset["type"] ?? "No Genre Information",
-                        balance: (asset["balance"] != null &&
-                                asset["balance"] is String)
-                            ? double.tryParse(asset["balance"]) ??
-                                0.0 // String'i double'a çevirme
+                        balance: (asset["balance"] != null && asset["balance"] is String)
+                            ? double.tryParse(asset["balance"]) ?? 0.0
                             : asset["balance"] ?? 0.0,
+                        accountId: asset["id"],
+                        index:index,
                         onPressed: () {
-                          print('Clicked');
+                        
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ViewListPage(
+                                accountId: asset["id"], 
+                                index: index + 1,       
+                              ),
+                            ),
+                          );
                         },
                       ),
                     ),
@@ -124,17 +130,13 @@ class _AccountListPageState extends State<AccountListPage> {
                 );
               },
             ),
-            bottomNavigationBar: isSmallScreen
+      bottomNavigationBar: isSmallScreen
           ? Container(
               decoration: BoxDecoration(
                 color: AppColors.primary,
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey
-                      ..withValues(
-                        alpha: (0.5 * 255),
-                        //blurRadius: 10,
-                      ),
+                    color: Colors.grey.withOpacity(0.5),
                   ),
                 ],
               ),
