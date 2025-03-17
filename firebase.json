@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"flutter":{"platforms":{"android":{"default":{"projectId":"solgensenapp","appId":"1:812156076823:android:6e9bc4f3bd84c873146d52","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"solgensenapp","configurations":{"android":"1:812156076823:android:6e9bc4f3bd84c873146d52","ios":"1:812156076823:ios:922ef9ff76e9d3ce146d52"}}}}}}
+=======
+{"flutter":{"platforms":{"android":{"default":{"projectId":"solgensenapp","appId":"1:812156076823:android:6e9bc4f3bd84c873146d52","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"solgensenapp","configurations":{"android":"1:812156076823:android:6e9bc4f3bd84c873146d52","ios":"1:812156076823:ios:922ef9ff76e9d3ce146d52","macos":"1:812156076823:ios:922ef9ff76e9d3ce146d52","web":"1:812156076823:web:a0917f1ca14a2045146d52","windows":"1:812156076823:web:b5a66949184977ed146d52"}}}}}}
+>>>>>>> elif

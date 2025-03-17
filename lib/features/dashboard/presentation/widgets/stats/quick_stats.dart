@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
+=======
+import 'package:solgensenapp/core/constants/app_colors.dart';
+>>>>>>> elif
 import 'stat_card.dart';
 import 'package:solgensenapp/core/utils/responsive_layout.dart';
 import 'package:solgensenapp/core/utils/responsive_breakpoints.dart';
@@ -8,7 +12,11 @@ class QuickStats extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
     ResponsiveLayout.isMobile(context);
+=======
+    final isSmallScreen = ResponsiveLayout.isMobile(context);
+>>>>>>> elif
 
     return Container(
       padding: ResponsiveBreakpoints.getPadding(context),

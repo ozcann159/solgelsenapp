@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 buildscript {
     repositories {
         google()  
@@ -9,6 +10,8 @@ buildscript {
 }
 
 
+=======
+>>>>>>> elif
 allprojects {
     repositories {
         google()
