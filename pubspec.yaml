@@ -1,0 +1,54 @@
+name: solgensenapp
+
+description: "A new Flutter project."
+
+publish_to: "none"
+
+version: 0.1.0
+
+environment:
+  sdk: ^3.6.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  fl_chart: ^0.65.0
+
+  google_fonts: ^6.1.0
+  flutter_svg: ^2.0.17
+  cupertino_icons: ^1.0.8
+  firebase_core: ^3.12.1
+  cloud_firestore: ^5.6.5
+  firebase_auth: ^5.1.4
+  intl: ^0.20.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/icons/
+    - assets/icons/1.svg
+  fonts:
+    - family: Montserrat
+      fonts:
+        - asset: assets/fonts/Montserrat-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Montserrat-Bold.ttf
+          weight: 700
+fonts:
+  - family: IBMPlexSans
+    fonts:
+      - asset: assets/fonts/IBMPlexSans-Regular.ttf
+        weight: 400
+      - asset: assets/fonts/IBMPlexSans-Medium.ttf
+        weight: 500
+      - asset: assets/fonts/IBMPlexSans-Bold.ttf
+        weight: 700
