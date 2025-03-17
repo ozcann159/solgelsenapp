@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-
-=======
 import 'package:solgensenapp/core/constants/app_colors.dart';
->>>>>>> elif
 
 class ShipmentsSection extends StatelessWidget {
   const ShipmentsSection({super.key});
