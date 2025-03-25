@@ -27,7 +27,7 @@ class _SplashScreenState extends State<SplashPage> {
         ),
         child: Stack(
           children: [
-            // Arka plan dalga deseni
+            // Arka plan
             Positioned(
               right: -50,
               top: 0,
@@ -82,7 +82,7 @@ class _SplashScreenState extends State<SplashPage> {
                           ),
                         ),
                         const Text(
-                          'SOLGENSEN',
+                          'SİBERTRONİK',
                           style: TextStyle(
                             fontSize: 32,
                             fontWeight: FontWeight.bold,
@@ -100,7 +100,7 @@ class _SplashScreenState extends State<SplashPage> {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>  HomePage(),
+                              builder: (context) => HomePage(),
                             ),
                           );
                         },

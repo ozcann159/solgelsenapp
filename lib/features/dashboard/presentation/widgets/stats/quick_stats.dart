@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:solgensenapp/core/constants/app_colors.dart';
 import 'stat_card.dart';
 import 'package:solgensenapp/core/utils/responsive_layout.dart';
 import 'package:solgensenapp/core/utils/responsive_breakpoints.dart';

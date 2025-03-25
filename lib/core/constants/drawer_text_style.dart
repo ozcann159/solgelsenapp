@@ -11,8 +11,8 @@ class DrawerTextStyle {
   static const TextStyle subMenuStyle = TextStyle(
     color: AppColors.textLight,
     fontFamily: 'IBMPlexSans',
-    fontWeight: FontWeight.normal,
-    fontSize: 18,
+    fontWeight: FontWeight.w300,
+    fontSize: 16,
   );
   static const TextStyle childMenuStyle = TextStyle(
     color: AppColors.textLight,
