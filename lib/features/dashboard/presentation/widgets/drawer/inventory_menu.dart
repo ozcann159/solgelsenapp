@@ -40,7 +40,7 @@ class InventoryMenu extends StatelessWidget {
             ),
             title: Text(
               "Variants",
-              style: DrawerTextStyle.subMenuStyle.copyWith(fontSize: 14),
+              style: DrawerTextStyle.subMenuStyle,
             ),
             onTap: () {
               Navigator.push(
@@ -61,7 +61,7 @@ class InventoryMenu extends StatelessWidget {
             ),
             title: Text(
               "Suppliers",
-              style: DrawerTextStyle.subMenuStyle.copyWith(fontSize: 14),
+              style: DrawerTextStyle.subMenuStyle,
             ),
             onTap: () {
               Navigator.push(
@@ -82,7 +82,7 @@ class InventoryMenu extends StatelessWidget {
             ),
             title: Text(
               "Categories",
-              style: DrawerTextStyle.subMenuStyle.copyWith(fontSize: 14),
+              style: DrawerTextStyle.subMenuStyle,
             ),
             onTap: () {
               Navigator.push(

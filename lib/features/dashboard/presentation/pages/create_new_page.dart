@@ -58,8 +58,9 @@ class _CreateNewPageState extends State<CreateNewPage> {
                 controller: nameController,
                 decoration: InputDecoration(
                   labelText: 'Account Name',
+              
                   contentPadding:
-                      EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                      EdgeInsets.symmetric(vertical: 6, horizontal: 10),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
