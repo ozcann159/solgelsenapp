@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:solgensenapp/core/constants/drawer_text_style.dart';
-import 'package:solgensenapp/features/dashboard/presentation/pages/supplier_list_page.dart';
+import 'package:solgensenapp/features/dashboard/presentation/pages/categories_list_page.dart';
+import 'package:solgensenapp/features/dashboard/presentation/pages/suppliers_list_page.dart';
 import 'package:solgensenapp/features/dashboard/presentation/pages/variants_list_page.dart';
 
 class InventoryMenu extends StatelessWidget {
@@ -34,7 +35,7 @@ class InventoryMenu extends StatelessWidget {
             leading: Padding(
               padding: EdgeInsets.only(left: 6.0),
               child: Icon(
-                CupertinoIcons.list_bullet,
+                Icons.category,
                 color: Colors.white,
               ),
             ),
@@ -55,7 +56,7 @@ class InventoryMenu extends StatelessWidget {
             leading: Padding(
               padding: EdgeInsets.only(left: 6.0),
               child: Icon(
-                CupertinoIcons.list_bullet,
+                Icons.inventory_2,
                 color: Colors.white,
               ),
             ),
@@ -67,7 +68,7 @@ class InventoryMenu extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const SupplierListPage(),
+                  builder: (context) => const SuppliersListPage(),
                 ),
               );
             },
@@ -76,7 +77,7 @@ class InventoryMenu extends StatelessWidget {
             leading: Padding(
               padding: EdgeInsets.only(left: 6.0),
               child: Icon(
-                CupertinoIcons.list_bullet,
+                Icons.business,
                 color: Colors.white,
               ),
             ),
@@ -88,7 +89,7 @@ class InventoryMenu extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const VariantsListPage(),
+                  builder: (context) => const CategoriesListPage(),
                 ),
               );
             },

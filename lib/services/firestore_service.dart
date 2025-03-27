@@ -1,174 +1,123 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:solgensenapp/features/dashboard/data/models/category_model.dart';
-import 'package:solgensenapp/features/dashboard/data/models/variant_model.dart';
-import 'package:solgensenapp/features/dashboard/data/models/supplier_model.dart';
+import 'package:solgensenapp/features/dashboard/domain/category_model.dart';
+import 'package:solgensenapp/features/dashboard/domain/supplier_model.dart';
+import 'package:solgensenapp/features/dashboard/domain/variant_model.dart';
 
 class FirestoreService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  // Kategori İşlemleri
+  // Categories
   Future<List<CategoryModel>> getCategories() async {
-    try {
-      final QuerySnapshot snapshot = await _firestore.collection('categories').get();
-      return snapshot.docs.map((doc) => CategoryModel.fromMap(
-        doc.data() as Map<String, dynamic>, 
-        doc.id
-      )).toList();
-    } catch (e) {
-      print('Kategoriler getirilirken hata: $e');
-      return [];
-    }
+    final QuerySnapshot snapshot = await _firestore.collection('categories').get();
+    return snapshot.docs.map((doc) => CategoryModel.fromMap(
+      Map<String, dynamic>.from(doc.data() as Map<Object?, Object?>),
+      doc.id
+    )).toList();
   }
 
   Future<void> addCategory(CategoryModel category) async {
-    try {
-      await _firestore.collection('categories').add(category.toMap());
-    } catch (e) {
-      print('Kategori eklenirken hata: $e');
-      rethrow;
-    }
+    await _firestore.collection('categories').add(category.toMap());
   }
 
-  // Variant İşlemleri
+  Future<void> updateCategory(CategoryModel category) async {
+    await _firestore.collection('categories').doc(category.id).update(category.toMap());
+  }
+
+  Future<void> deleteCategory(String categoryId) async {
+    await _firestore.collection('categories').doc(categoryId).delete();
+  }
+
+  // Variants
   Future<List<VariantModel>> getVariants() async {
-    try {
-      final QuerySnapshot snapshot = await _firestore.collection('variants').get();
-      return snapshot.docs.map((doc) => VariantModel.fromMap(
-        doc.data() as Map<String, dynamic>, 
-        doc.id
-      )).toList();
-    } catch (e) {
-      print('Variantlar getirilirken hata: $e');
-      return [];
-    }
+    final QuerySnapshot snapshot = await _firestore.collection('variants').get();
+    return snapshot.docs.map((doc) => VariantModel.fromMap(
+      Map<String, dynamic>.from(doc.data() as Map<Object?, Object?>),
+      doc.id
+    )).toList();
   }
 
-  Future<void> addVariant(VariantModel variant) async {
-    try {
-      await _firestore.collection('variants').add(variant.toMap());
-    } catch (e) {
-      print('Variant eklenirken hata: $e');
-      rethrow;
-    }
-  }
-
-  // Filtreleme ve Sıralama İşlemleri
   Future<List<VariantModel>> getFilteredVariants({
     String? searchText,
-    DocumentReference? categoryRef,
+    String? categoryId,
     String? sortBy,
     bool descending = false,
   }) async {
-    try {
-      Query query = _firestore.collection('variants');
+    Query query = _firestore.collection('variants');
 
-      if (categoryRef != null) {
-        query = query.where('category', isEqualTo: categoryRef);
-      }
-
-      if (searchText != null && searchText.isNotEmpty) {
-        query = query.where('name', isGreaterThanOrEqualTo: searchText)
-                    .where('name', isLessThan: searchText + 'z');
-      }
-
-      if (sortBy != null) {
-        query = query.orderBy(sortBy, descending: descending);
-      }
-
-      final QuerySnapshot snapshot = await query.get();
-      return snapshot.docs.map((doc) => VariantModel.fromMap(
-        doc.data() as Map<String, dynamic>, 
-        doc.id
-      )).toList();
-    } catch (e) {
-      print('Filtreleme sırasında hata: $e');
-      return [];
+    if (searchText != null && searchText.isNotEmpty) {
+      query = query.where('name', isGreaterThanOrEqualTo: searchText)
+                  .where('name', isLessThan: searchText + 'z');
     }
+
+    if (categoryId != null) {
+      query = query.where('categoryId', isEqualTo: categoryId);
+    }
+
+    if (sortBy != null) {
+      query = query.orderBy(sortBy, descending: descending);
+    }
+
+    final QuerySnapshot snapshot = await query.get();
+    return snapshot.docs.map((doc) => VariantModel.fromMap(
+      Map<String, dynamic>.from(doc.data() as Map<Object?, Object?>),
+      doc.id
+    )).toList();
   }
 
-  // Alt kategorileri getirme
-  Future<List<CategoryModel>> getSubcategories(DocumentReference parentRef) async {
-    try {
-      final QuerySnapshot snapshot = await _firestore
-          .collection('categories')
-          .where('parentCategory', isEqualTo: parentRef)
-          .get();
-      
-      return snapshot.docs.map((doc) => CategoryModel.fromMap(
-        doc.data() as Map<String, dynamic>, 
-        doc.id
-      )).toList();
-    } catch (e) {
-      print('Alt kategoriler getirilirken hata: $e');
-      return [];
-    }
+  Future<String> addVariant(VariantModel variant) async {
+    final docRef = await _firestore.collection('variants').add(variant.toMap());
+    return docRef.id;
   }
 
-  // Supplier İşlemleri
+  Future<void> updateVariant(VariantModel variant) async {
+    await _firestore.collection('variants').doc(variant.id).update(variant.toMap());
+  }
+
+  Future<void> deleteVariant(String variantId) async {
+    await _firestore.collection('variants').doc(variantId).delete();
+  }
+
+  // Suppliers
   Future<List<SupplierModel>> getSuppliers() async {
-    try {
-      final QuerySnapshot snapshot = await _firestore.collection('suppliers').get();
-      return snapshot.docs.map((doc) => SupplierModel.fromMap(
-        doc.data() as Map<String, dynamic>, 
-        doc.id
-      )).toList();
-    } catch (e) {
-      print('Tedarikçiler getirilirken hata: $e');
-      return [];
-    }
-  }
-
-  Future<void> addSupplier(SupplierModel supplier) async {
-    try {
-      await _firestore.collection('suppliers').add(supplier.toMap());
-    } catch (e) {
-      print('Tedarikçi eklenirken hata: $e');
-      rethrow;
-    }
+    final QuerySnapshot snapshot = await _firestore.collection('suppliers').get();
+    return snapshot.docs.map((doc) => SupplierModel.fromMap(
+      Map<String, dynamic>.from(doc.data() as Map<Object?, Object?>),
+      doc.id
+    )).toList();
   }
 
   Future<List<SupplierModel>> getFilteredSuppliers({
     String? searchText,
-    DocumentReference? categoryRef,
+    String? variantId,
   }) async {
-    try {
-      Query query = _firestore.collection('suppliers');
+    Query query = _firestore.collection('suppliers');
 
-      if (categoryRef != null) {
-        query = query.where('category', isEqualTo: categoryRef);
-      }
-
-      if (searchText != null && searchText.isNotEmpty) {
-        query = query.where('supplierName', isGreaterThanOrEqualTo: searchText)
-                    .where('supplierName', isLessThan: searchText + 'z');
-      }
-
-      final QuerySnapshot snapshot = await query.get();
-      return snapshot.docs.map((doc) => SupplierModel.fromMap(
-        doc.data() as Map<String, dynamic>, 
-        doc.id
-      )).toList();
-    } catch (e) {
-      print('Tedarikçi filtreleme sırasında hata: $e');
-      return [];
+    if (searchText != null && searchText.isNotEmpty) {
+      query = query.where('name', isGreaterThanOrEqualTo: searchText)
+                  .where('name', isLessThan: searchText + 'z');
     }
+
+    if (variantId != null) {
+      query = query.where('variantId', isEqualTo: variantId);
+    }
+
+    final QuerySnapshot snapshot = await query.get();
+    return snapshot.docs.map((doc) => SupplierModel.fromMap(
+      Map<String, dynamic>.from(doc.data() as Map<Object?, Object?>),
+      doc.id
+    )).toList();
   }
 
-  // Variant-Supplier İlişkisi İşlemleri
-  Future<List<SupplierModel>> getSuppliersForVariant(DocumentReference variantRef) async {
-    try {
-      final QuerySnapshot snapshot = await _firestore
-          .collection('suppliers')
-          .where('variants', arrayContains: variantRef)
-          .get();
-      
-      return snapshot.docs.map((doc) => SupplierModel.fromMap(
-        doc.data() as Map<String, dynamic>, 
-        doc.id
-      )).toList();
-    } catch (e) {
-      print('Variant tedarikçileri getirilirken hata: $e');
-      return [];
-    }
+  Future<String> addSupplier(SupplierModel supplier) async {
+    final docRef = await _firestore.collection('suppliers').add(supplier.toMap());
+    return docRef.id;
+  }
+
+  Future<void> updateSupplier(SupplierModel supplier) async {
+    await _firestore.collection('suppliers').doc(supplier.id).update(supplier.toMap());
+  }
+
+  Future<void> deleteSupplier(String supplierId) async {
+    await _firestore.collection('suppliers').doc(supplierId).delete();
   }
 }

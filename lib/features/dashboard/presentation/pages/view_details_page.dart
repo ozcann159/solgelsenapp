@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:solgensenapp/core/constants/app_colors.dart'; 
+import 'package:solgensenapp/core/constants/app_colors.dart'; // intl paketini içeri aktarın
 
 class ViewListPage extends StatelessWidget {
   final String accountId;
@@ -90,37 +90,46 @@ class ViewListPage extends StatelessWidget {
 
           return Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Card(
-              color: Colors.white,
-              elevation: 4.0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
+            child: Container(
+              constraints: BoxConstraints(
+                maxWidth: 400,
+                maxHeight: MediaQuery.of(context).size.height * 0.6,
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Account ID: $index",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.primary,
-                      ),
+              child: Card(
+                color: Colors.white,
+                elevation: 4,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Account ID: $index",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.primary,
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Divider(),
+                        SizedBox(height: 10),
+                        _buildDetailRow("Account Name",
+                            accountData['name'] ?? "Unknown Account"),
+                        _buildDetailRow(
+                            "Account Type", accountData['type'] ?? "No Type"),
+                        _buildDetailRow(
+                            "Balance", "\$${accountData['balance'] ?? '0.0'}"),
+                        _buildDetailRow("Created At", formattedDate),
+                        SizedBox(height: 10),
+                      ],
                     ),
-                    SizedBox(height: 10),
-                    Divider(),
-                    SizedBox(height: 10),
-                    _buildDetailRow("Account Name",
-                        accountData['name'] ?? "Unknown Account"),
-                    _buildDetailRow(
-                        "Account Type", accountData['type'] ?? "No Type"),
-                    _buildDetailRow(
-                        "Balance", "\$${accountData['balance'] ?? '0.0'}"),
-                    _buildDetailRow("Created At", formattedDate),
-                    SizedBox(height: 20),
-                  ],
+                  ),
                 ),
               ),
             ),

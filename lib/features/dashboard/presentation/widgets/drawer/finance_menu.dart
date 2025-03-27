@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:solgensenapp/core/constants/drawer_text_style.dart';
 import 'package:solgensenapp/features/dashboard/presentation/pages/account_list_page.dart';
+import 'package:solgensenapp/features/dashboard/presentation/pages/create_new_page.dart';
 
 class FinanceMenu extends StatelessWidget {
   const FinanceMenu({
@@ -85,7 +86,15 @@ class FinanceMenu extends StatelessWidget {
                   "Create Account",
                   style: DrawerTextStyle.childMenuStyle.copyWith(fontSize: 14),
                 ),
-                onTap: () {},
+                
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CreateNewPage(),
+                    ),
+                  );
+                },
               ),
             ],
           ),
