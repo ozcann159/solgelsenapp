@@ -4,6 +4,7 @@ import 'package:solgensenapp/core/constants/app_colors.dart';
 import 'package:solgensenapp/core/constants/drawer_text_style.dart';
 import 'package:solgensenapp/features/dashboard/presentation/widgets/drawer/finance_menu.dart';
 import 'package:solgensenapp/features/dashboard/presentation/widgets/drawer/inventory_menu.dart';
+import 'package:solgensenapp/features/dashboard/presentation/widgets/drawer/products_menu.dart';
 
 class CustomDrawer extends StatefulWidget {
   const CustomDrawer({super.key});
@@ -37,19 +38,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   ),
                   onTap: () {},
                 ),
-                ListTile(
-                  leading: SvgPicture.asset(
-                    'assets/icons/product.svg',
-                    width: 24,
-                    height: 24,
-                    fit: BoxFit.contain,
-                  ),
-                  title: Text(
-                    "Products",
-                    style: DrawerTextStyle.MainMenuStyle,
-                  ),
-                  onTap: () {},
-                ),
+                ProductsMenu(),
                 ListTile(
                   leading: SvgPicture.asset(
                     'assets/icons/ohs.svg',

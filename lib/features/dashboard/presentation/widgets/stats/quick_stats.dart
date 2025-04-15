@@ -30,34 +30,45 @@ class QuickStats extends StatelessWidget {
           const SizedBox(height: 16),
           Row(
             children: [
-              _buildQuickStatCard(
-                'Low Stock Items',
-                '3',
-                'Items need attention',
-                Colors.orange,
-              ),
-              const SizedBox(width: 16),
-              _buildQuickStatCard(
-                'Delayed Shipments',
-                '14',
-                'Customer orders',
-                Colors.red,
-              ),
-              const SizedBox(width: 16),
-              _buildQuickStatCard(
-                'Support Tickets',
-                '1',
-                'Pending tickets',
-                Colors.blue,
-              ),
+              if (isSmallScreen) ...[
+                _buildQuickStatCard(
+                  'Low Stock Items',
+                  '3',
+                  'Items need attention',
+                  Colors.orange,
+                ),
+              ],
+              if (!isSmallScreen) ...[
+                _buildQuickStatCard(
+                  'Low Stock Items',
+                  '3',
+                  'Items need attention',
+                  Colors.orange,
+                ),
+                const SizedBox(width: 16),
+                _buildQuickStatCard(
+                  'Delayed Shipments',
+                  '14',
+                  'Customer orders',
+                  Colors.red,
+                ),
+                const SizedBox(width: 16),
+                _buildQuickStatCard(
+                  'Support Tickets',
+                  '1',
+                  'Pending tickets',
+                  Colors.blue,
+                ),
+              ],
             ],
-          ),
+          )
         ],
       ),
     );
   }
 
-  Widget _buildQuickStatCard(String title, String value, String subtitle, Color color) {
+  Widget _buildQuickStatCard(
+      String title, String value, String subtitle, Color color) {
     return Expanded(
       child: StatCard(
         title: title,
@@ -67,4 +78,4 @@ class QuickStats extends StatelessWidget {
       ),
     );
   }
-} 
+}

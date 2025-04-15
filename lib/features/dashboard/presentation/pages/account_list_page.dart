@@ -29,7 +29,7 @@ class _AccountListPageState extends State<AccountListPage> {
           await FirebaseFirestore.instance.collection('accounts').get();
       setState(() {
         accounts = snapshot.docs.map((doc) {
-          var data = doc.data() as Map<String, dynamic>;
+          var data = doc.data();
           data['id'] = doc.id;
           return data;
         }).toList();
