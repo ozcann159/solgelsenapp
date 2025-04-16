@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fl_chart/fl_chart.dart';
 import 'package:solgensenapp/core/constants/app_colors.dart';
 import 'package:solgensenapp/core/utils/responsive_layout.dart';
 import 'package:solgensenapp/features/dashboard/presentation/widgets/appbar/custom_appbar.dart';
@@ -18,11 +16,11 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final isSmallScreen = ResponsiveLayout.isMobile(context);
-    final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
     return Scaffold(
       backgroundColor: const Color(0xFFF5F6FA),
-      key: _scaffoldKey,
+      key: scaffoldKey,
       drawer: const CustomDrawer(),
       appBar: CustomAppbar(),
       body: Row(
@@ -178,96 +176,96 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _buildMonthlyPaymentChart() {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
-            blurRadius: 4,
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            'Monthly Payment Overview',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(height: 16),
-          SizedBox(
-            height: 300,
-            child: LineChart(
-              LineChartData(
-                gridData: FlGridData(show: true),
-                titlesData: FlTitlesData(
-                  leftTitles: AxisTitles(
-                    sideTitles: SideTitles(showTitles: true),
-                  ),
-                  bottomTitles: AxisTitles(
-                    sideTitles: SideTitles(
-                      showTitles: true,
-                      getTitlesWidget: (value, meta) {
-                        const months = [
-                          'Sep',
-                          'Oct',
-                          'Nov',
-                          'Dec',
-                          'Jan',
-                          'Feb'
-                        ];
-                        if (value.toInt() < months.length) {
-                          return Text(months[value.toInt()]);
-                        }
-                        return const Text('');
-                      },
-                    ),
-                  ),
-                ),
-                lineBarsData: [
-                  LineChartBarData(
-                    spots: const [
-                      // FlSpot(0, 0),
-                      //FlSpot(1, 0),
-                      // FlSpot(2, 50),
-                      // FlSpot(3, 40),
-                      //FlSpot(4, 0),
-                      //FlSpot(5, 30),
-                    ],
-                    isCurved: true,
-                    color: Colors.pink,
-                    barWidth: 3,
-                    dotData: FlDotData(show: false),
-                  ),
-                  LineChartBarData(
-                    spots: const [
-                      FlSpot(0, 0),
-                      FlSpot(1, 0),
-                      FlSpot(2, 20),
-                      FlSpot(3, 350),
-                      FlSpot(4, 0),
-                      FlSpot(5, 20),
-                    ],
-                    isCurved: true,
-                    color: Colors.greenAccent,
-                    barWidth: 3,
-                    dotData: FlDotData(show: false),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  // Widget _buildMonthlyPaymentChart() {
+  //   return Container(
+  //     padding: const EdgeInsets.all(16),
+  //     decoration: BoxDecoration(
+  //       color: Colors.white,
+  //       borderRadius: BorderRadius.circular(8),
+  //       boxShadow: [
+  //         BoxShadow(
+  //           color: Colors.grey.withOpacity(0.1),
+  //           blurRadius: 4,
+  //         ),
+  //       ],
+  //     ),
+  //     child: Column(
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       children: [
+  //         const Text(
+  //           'Monthly Payment Overview',
+  //           style: TextStyle(
+  //             fontSize: 18,
+  //             fontWeight: FontWeight.bold,
+  //           ),
+  //         ),
+  //         const SizedBox(height: 16),
+  //         SizedBox(
+  //           height: 300,
+  //           child: LineChart(
+  //             LineChartData(
+  //               gridData: FlGridData(show: true),
+  //               titlesData: FlTitlesData(
+  //                 leftTitles: AxisTitles(
+  //                   sideTitles: SideTitles(showTitles: true),
+  //                 ),
+  //                 bottomTitles: AxisTitles(
+  //                   sideTitles: SideTitles(
+  //                     showTitles: true,
+  //                     getTitlesWidget: (value, meta) {
+  //                       const months = [
+  //                         'Sep',
+  //                         'Oct',
+  //                         'Nov',
+  //                         'Dec',
+  //                         'Jan',
+  //                         'Feb'
+  //                       ];
+  //                       if (value.toInt() < months.length) {
+  //                         return Text(months[value.toInt()]);
+  //                       }
+  //                       return const Text('');
+  //                     },
+  //                   ),
+  //                 ),
+  //               ),
+  //               lineBarsData: [
+  //                 LineChartBarData(
+  //                   spots: const [
+  //                     // FlSpot(0, 0),
+  //                     //FlSpot(1, 0),
+  //                     // FlSpot(2, 50),
+  //                     // FlSpot(3, 40),
+  //                     //FlSpot(4, 0),
+  //                     //FlSpot(5, 30),
+  //                   ],
+  //                   isCurved: true,
+  //                   color: Colors.pink,
+  //                   barWidth: 3,
+  //                   dotData: FlDotData(show: false),
+  //                 ),
+  //                 LineChartBarData(
+  //                   spots: const [
+  //                     FlSpot(0, 0),
+  //                     FlSpot(1, 0),
+  //                     FlSpot(2, 20),
+  //                     FlSpot(3, 350),
+  //                     FlSpot(4, 0),
+  //                     FlSpot(5, 20),
+  //                   ],
+  //                   isCurved: true,
+  //                   color: Colors.greenAccent,
+  //                   barWidth: 3,
+  //                   dotData: FlDotData(show: false),
+  //                 ),
+  //               ],
+  //             ),
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   Widget _buildMonthlySalesSection() {
     return Container(

@@ -16,7 +16,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
       title: Text(
-        'SOLGENSEN',
+        'SİBERTRONİK',
         style: TextStyle(
           fontFamily: 'Montserrat',
           fontSize: 18,

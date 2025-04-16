@@ -14,8 +14,12 @@ android {
     compileSdkVersion 34  // compileSdkVersion 33
 =======
     compileSdk = flutter.compileSdkVersion
+<<<<<<< HEAD
 >>>>>>> elif
     ndkVersion = flutter.ndkVersion
+=======
+  
+>>>>>>> elif
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8

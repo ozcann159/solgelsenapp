@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:solgensenapp/core/constants/app_colors.dart';
 
 import 'package:solgensenapp/features/dashboard/presentation/pages/view_details_page.dart';
 
@@ -42,25 +43,25 @@ class AccountListCard extends StatelessWidget {
                   Text(
                     title,
                     style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.normal,
-                        fontFamily: 'Montserrat'),
+                      color: AppColors.black,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                   SizedBox(height: 4),
                   Text(
                     subtitle,
                     style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.normal,
-                        fontFamily: 'Montserrat'),
+                      color: AppColors.black,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                   SizedBox(height: 4),
                   Text(
                     balance.toStringAsFixed(3),
                     style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.normal,
-                        fontFamily: 'Montserrat'),
+                      color: AppColors.black,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ],
               ),

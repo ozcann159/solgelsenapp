@@ -36,8 +36,8 @@ class _CreateNewPageState extends State<CreateNewPage> {
       appBar: CreateAppBar(),
       body: Center(
         child: Container(
-          width: 369,
-          height: 460,
+          width: 347,
+          height: 425,
           padding: EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: Colors.white,
@@ -58,8 +58,9 @@ class _CreateNewPageState extends State<CreateNewPage> {
                 controller: nameController,
                 decoration: InputDecoration(
                   labelText: 'Account Name',
+              
                   contentPadding:
-                      EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                      EdgeInsets.symmetric(vertical: 6, horizontal: 10),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
@@ -135,12 +136,11 @@ class _CreateNewPageState extends State<CreateNewPage> {
                   }
 
                   FirebaseFirestore firestore = FirebaseFirestore.instance;
-                  var newAccountRef = firestore
-                      .collection('accounts')
-                      .doc(); // Id
+                  var newAccountRef =
+                      firestore.collection('accounts').doc(); // Id
 
                   await newAccountRef.set({
-                    'id': newAccountRef.id, 
+                    'id': newAccountRef.id,
                     'name': nameController.text,
                     'type': selectedAccountType,
                     'balance': balance,

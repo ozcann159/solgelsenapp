@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:solgensenapp/core/constants/app_colors.dart';
 
 class ShipmentsSection extends StatelessWidget {
   const ShipmentsSection({super.key});

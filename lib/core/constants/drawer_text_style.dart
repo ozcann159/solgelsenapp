@@ -12,7 +12,7 @@ class DrawerTextStyle {
     color: AppColors.textLight,
     fontFamily: 'IBMPlexSans',
     fontWeight: FontWeight.normal,
-    fontSize: 18,
+    fontSize: 16,
   );
   static const TextStyle childMenuStyle = TextStyle(
     color: AppColors.textLight,

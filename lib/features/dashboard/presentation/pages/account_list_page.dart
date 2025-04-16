@@ -29,7 +29,7 @@ class _AccountListPageState extends State<AccountListPage> {
           await FirebaseFirestore.instance.collection('accounts').get();
       setState(() {
         accounts = snapshot.docs.map((doc) {
-          var data = doc.data() as Map<String, dynamic>;
+          var data = doc.data();
           data['id'] = doc.id;
           return data;
         }).toList();
@@ -76,18 +76,21 @@ class _AccountListPageState extends State<AccountListPage> {
                           context: context,
                           builder: (context) => AlertDialog(
                             title: Text("Delete Confirmation"),
-                            content: Text("Are you sure you want to delete this item?"),
+                            content: Text(
+                                "Are you sure you want to delete this item?"),
                             actions: [
                               TextButton(
-                                onPressed: () => Navigator.of(context).pop(false),
-                                child: Text("İptal"),
+                                onPressed: () =>
+                                    Navigator.of(context).pop(false),
+                                child: Text("Cancel"),
                               ),
                               TextButton(
                                 onPressed: () {
                                   Navigator.of(context).pop(true);
                                   _deleteAccount(asset["id"], index);
                                 },
-                                child: Text("Evet", style: TextStyle(color: Colors.red)),
+                                child: Text("Yes",
+                                    style: TextStyle(color: Colors.red)),
                               ),
                             ],
                           ),
@@ -101,24 +104,25 @@ class _AccountListPageState extends State<AccountListPage> {
                           color: Colors.red.withOpacity(0.7),
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: Icon(Icons.delete, color: Colors.white, size: 30),
+                        child:
+                            Icon(Icons.delete, color: Colors.white, size: 30),
                       ),
                       child: AccountListCard(
                         title: asset["name"] ?? "Default Name",
                         subtitle: asset["type"] ?? "No Genre Information",
-                        balance: (asset["balance"] != null && asset["balance"] is String)
+                        balance: (asset["balance"] != null &&
+                                asset["balance"] is String)
                             ? double.tryParse(asset["balance"]) ?? 0.0
                             : asset["balance"] ?? 0.0,
                         accountId: asset["id"],
-                        index:index,
+                        index: index,
                         onPressed: () {
-                        
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) => ViewListPage(
-                                accountId: asset["id"], 
-                                index: index + 1,       
+                                accountId: asset["id"],
+                                index: index + 1,
                               ),
                             ),
                           );
