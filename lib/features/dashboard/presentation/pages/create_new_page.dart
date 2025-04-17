@@ -13,7 +13,7 @@ class CreateNewPage extends StatefulWidget {
   @override
   _CreateNewPageState createState() => _CreateNewPageState();
 }
-
+ 
 class _CreateNewPageState extends State<CreateNewPage> {
   String? selectedAccountType;
   TextEditingController nameController = TextEditingController();
@@ -57,8 +57,7 @@ class _CreateNewPageState extends State<CreateNewPage> {
               TextFormField(
                 controller: nameController,
                 decoration: InputDecoration(
-                  labelText: 'Account Name',
-              
+                  labelText: 'Account Name',   
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 6, horizontal: 10),
                   border: OutlineInputBorder(
@@ -146,7 +145,6 @@ class _CreateNewPageState extends State<CreateNewPage> {
                     'balance': balance,
                     'createdAt': FieldValue.serverTimestamp(),
                   });
-
                   Navigator.push(
                     context,
                     MaterialPageRoute(

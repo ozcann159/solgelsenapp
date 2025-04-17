@@ -188,10 +188,10 @@ class _WarehousesPageState extends State<WarehousesPage> {
             icon: const Icon(Icons.refresh, color: Colors.white),
             onPressed: _loadWarehouses,
           ),
-          IconButton(
-            icon: const Icon(Icons.delete, color: Colors.white),
-            onPressed: selectedWarehouses.isEmpty ? null : _deleteSelected,
-          ),
+          // IconButton(
+          //   icon: const Icon(Icons.delete, color: Colors.white),
+          //   onPressed: selectedWarehouses.isEmpty ? null : _deleteSelected,
+          // ),
         ],
       ),
       floatingActionButton: FloatingActionButton(

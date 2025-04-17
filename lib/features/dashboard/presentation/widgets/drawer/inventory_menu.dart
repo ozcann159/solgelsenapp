@@ -5,8 +5,9 @@ import 'package:solgensenapp/core/constants/drawer_text_style.dart';
 import 'package:solgensenapp/features/dashboard/presentation/pages/create_new_page.dart';
 import 'package:solgensenapp/features/dashboard/presentation/pages/inventory/create_new_inventory_item.dart';
 import 'package:solgensenapp/features/dashboard/presentation/pages/inventory/inventory_items_page.dart';
-import 'package:solgensenapp/features/dashboard/presentation/pages/inventory/location_page.dart';
-import 'package:solgensenapp/features/dashboard/presentation/pages/inventory/warehouses_page.dart';
+import 'package:solgensenapp/features/dashboard/presentation/pages/location/location_page.dart';
+import 'package:solgensenapp/features/dashboard/presentation/pages/warhouses/create_warehouses.dart';
+import 'package:solgensenapp/features/dashboard/presentation/pages/warhouses/warehouses_page.dart';
 
 class InventoryMenu extends StatelessWidget {
   const InventoryMenu({
@@ -134,7 +135,7 @@ class InventoryMenu extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => CreateNewPage(),
+                      builder: (context) => CreateWarehouses(),
                     ),
                   );
                 },

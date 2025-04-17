@@ -1,7 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:solgensenapp/features/dashboard/data/services/variant_service.dart';
-import 'package:solgensenapp/features/dashboard/domain/variant_model.dart';
+
 
 class CreateNewInventoryItem extends StatefulWidget {
   const CreateNewInventoryItem({super.key});

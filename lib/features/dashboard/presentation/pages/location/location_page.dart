@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:solgensenapp/core/constants/app_colors.dart';
+
 
 class LocationPage extends StatefulWidget {
   const LocationPage({super.key});
