@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:solgensenapp/core/constants/drawer_text_style.dart';
-import 'package:solgensenapp/features/dashboard/presentation/pages/create_new_page.dart';
 import 'package:solgensenapp/features/dashboard/presentation/pages/inventory/create_new_inventory_item.dart';
 import 'package:solgensenapp/features/dashboard/presentation/pages/inventory/inventory_items_page.dart';
+import 'package:solgensenapp/features/dashboard/presentation/pages/location/create_location_page.dart';
 import 'package:solgensenapp/features/dashboard/presentation/pages/location/location_page.dart';
 import 'package:solgensenapp/features/dashboard/presentation/pages/warhouses/create_warehouses.dart';
 import 'package:solgensenapp/features/dashboard/presentation/pages/warhouses/warehouses_page.dart';
@@ -171,7 +171,7 @@ class InventoryMenu extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => LocationPage(),
+                      builder: (context) => LocationsPage(),
                     ),
                   );
                 },
@@ -189,7 +189,7 @@ class InventoryMenu extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => CreateNewPage(),
+                      builder: (context) => CreateLocation(),
                     ),
                   );
                 },

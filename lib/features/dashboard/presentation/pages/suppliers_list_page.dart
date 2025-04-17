@@ -232,8 +232,7 @@ class _SuppliersListPageState extends State<SuppliersListPage> {
             );
           },
         ),
-        actions: [
-          
+        actions: [    
           IconButton(
             icon: const Icon(
               Icons.refresh,
